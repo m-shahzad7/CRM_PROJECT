@@ -3,7 +3,7 @@
 This is a full-stack CRM application with a Python backend and a React/Vite frontend.
 
 ## 📂 Project Structure
-* **backend/**: Contains the Django/Python logic and database.
+* **backend/**: Contains the Python logic and database.
 * **frontend/**: Contains the React/Vite source code (Ignored by default to protect local testing).
 
 ## 🚀 Getting Started
