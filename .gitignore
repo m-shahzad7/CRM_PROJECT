@@ -3,5 +3,3 @@ venv/
 backend/database.db
 backend/__pycache__/
 
-# Frontend (Testing files - local only)
-# frontend/
