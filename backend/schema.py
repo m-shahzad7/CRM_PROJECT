@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, Field
 
 
 class UserLogin(BaseModel):
@@ -9,7 +9,7 @@ class UserLogin(BaseModel):
 class UserCreate(BaseModel):
     username: str
     password: str
-    email: str
+    email: EmailStr
 
 
 class StatusUpdate(BaseModel):
@@ -17,7 +17,8 @@ class StatusUpdate(BaseModel):
 
 
 class EnquiryCreate(BaseModel):
-    name: str
-    phone_no: str
-    email: str
+    name: str = Field(..., min_length=2)
+    # Validates exactly 10 digits
+    phone_no: str = Field(..., pattern=r"^\d{10}$")
+    email: EmailStr  # Validates email format
     program: str

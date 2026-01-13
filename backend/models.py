@@ -15,7 +15,7 @@ class User(SQLModel, table=True):
 class Enquiry(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
-    phone_no: str
+    phone_no: str = Field(index=True)
     email: str
     program: str
     # Automatically track when the enquiry was made
