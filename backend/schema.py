@@ -14,3 +14,10 @@ class UserCreate(BaseModel):
 
 class StatusUpdate(BaseModel):
     status: str
+
+
+class EnquiryCreate(BaseModel):
+    name: str
+    phone_no: str
+    email: str
+    program: str

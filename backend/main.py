@@ -5,8 +5,8 @@ from typing import List
 
 # Internal Imports
 from settings import engine, get_session
-from models import User
-from schema import UserLogin, UserCreate
+from models import User, Enquiry
+from schema import UserLogin, UserCreate, EnquiryCreate
 
 app = FastAPI()
 
@@ -106,3 +106,19 @@ def delete_user(user_id: int, session: Session = Depends(get_session)):
     session.commit()
     print(f"🔥 User {db_user.username} removed from database.")
     return {"message": "User deleted successfully"}
+
+
+@app.post("/enquire")
+def create_enquiry(data: EnquiryCreate, session: Session = Depends(get_session)):
+    print(f"📩 New Enquiry from: {data.name} for {data.program}")
+    new_enquiry = Enquiry(**data.dict())
+    session.add(new_enquiry)
+    session.commit()
+    return {"message": "Enquiry submitted successfully"}
+
+
+@app.get("/enquiries", response_model=List[Enquiry])
+def get_enquiries(session: Session = Depends(get_session)):
+    print("📋 Admin fetching all enquiries...")
+    enquiries = session.exec(select(Enquiry)).all()
+    return enquiries
