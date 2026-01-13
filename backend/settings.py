@@ -1,22 +1,11 @@
-from typing import Optional
-from sqlmodel import SQLModel, Field
-from datetime import datetime
+from sqlmodel import create_engine, Session
+
+sqlite_file_name = "database.db"
+sqlite_url = f"sqlite:///{sqlite_file_name}"
+
+engine = create_engine(sqlite_url, connect_args={"check_same_thread": False})
 
 
-class User(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    username: str = Field(unique=True)
-    password: str
-    email: str
-    is_admin: bool = False
-    status: str = Field(default="Pending")
-
-
-class Enquiry(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    name: str
-    phone_no: str
-    email: str
-    program: str
-    # Automatically track when the enquiry was made
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+def get_session():
+    with Session(engine) as session:
+        yield session
