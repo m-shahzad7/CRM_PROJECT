@@ -4,4 +4,4 @@ backend/database.db
 backend/__pycache__/
 
 # Frontend
-frontend/
+frontend/node_modules
